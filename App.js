@@ -2,42 +2,43 @@ import React, {useState} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
 const App: () => Node = () => {
-  const [name, setName] = useState('Anderson');
-  const [session, setSession] = useState({number: 6, title: 'State'});
-  const [current, setCurrent] = useState(true);
+  const [name, setName] = useState('Style Test');
 
   const onClickHandler = () => {
-    setName('Anderson Vieira');
-    setSession({number: 7, title: 'Style'});
-    setCurrent(false);
+    setName('Style Test is Done!');
   };
 
   return (
     <View style={styles.body}>
       <Text style={styles.text}>{name}</Text>
-      <Text style={styles.text}>
-        Esta é a sessão de número {session.number} e é sobre {session.title}
-      </Text>
-      <Text style={styles.text}>
-        {current ? 'sessão atual' : 'próxima sessão'}
-      </Text>
-      <Button title={'Atualiza State'} onPress={onClickHandler} />
+      <View style={styles.button}>
+        <Button title={'Atualiza State'} onPress={onClickHandler} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1,
+    width: '100%',
+    height: '50%',
+    backgroundColor: '#ffff00',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0000ff',
+    borderWidth: 10,
+    borderColor: '#ff00ff',
+    borderRadius: 10,
   },
   text: {
-    color: '#ffffff',
+    color: '#000000',
     fontStyle: 'italic',
-    fontSize: 20,
+    fontSize: 40,
     margin: 10,
+    textTransform: 'uppercase',
+  },
+  button: {
+    width: 200,
+    height: 60,
   },
 });
 
