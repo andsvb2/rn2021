@@ -1,33 +1,49 @@
 import React, {useState} from 'react';
-import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
 
 const App = () => {
   const [items, setItems] = useState([
-    {key: 1, item: 'Item 1'},
-    {key: 2, item: 'Item 2'},
-    {key: 3, item: 'Item 3'},
-    {key: 4, item: 'Item 4'},
-    {key: 5, item: 'Item 5'},
-    {key: 6, item: 'Item 6'},
-    {key: 7, item: 'Item 7'},
-    {key: 8, item: 'Item 8'},
-    {key: 9, item: 'Item 9'},
-    {key: 68, item: 'Item 27'},
-    {key: 0, item: 'Item 78'},
-    {key: 44, item: 'Item 321'},
-    {key: 25, item: 'Item 25'},
+    {name: 'Item 1'},
+    {name: 'Item 2'},
+    {name: 'Item 3'},
+    {name: 'Item 4'},
+    {name: 'Item 5'},
+    {name: 'Item 6'},
+    {name: 'Item 7'},
+    {name: 'Item 8'},
+    {name: 'Item 9'},
+    {name: 'Item 27'},
+    {name: 'Item 78'},
+    {name: 'Item 321'},
+    {name: 'Item 25'},
   ]);
 
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = () => {
     setRefreshing(true);
-    setItems([...items, {key: 69, item: 'Item 69'}]);
+    setItems([...items, {name: 'Item 69'}]);
     setRefreshing(false);
   };
 
   return (
-    <ScrollView
+    <FlatList
+      keyExtractor={(item, index) => index.toString()}
+      data={items}
+      renderItem={({item}) => (
+        <View style={styles.item}>
+          <Text style={styles.text}>{item.name}</Text>
+        </View>
+      )}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          colors={['#ff00ff']}
+        />
+      }
+    />
+    /*  <ScrollView
       style={styles.body}
       refreshControl={
         <RefreshControl
@@ -36,8 +52,8 @@ const App = () => {
           colors={['#f080f2']}
         />
       }>
-      {/* Cria uma função para iterar sobre os itens do array e
-      exibi-los na view. */}
+      {/!* Cria uma função para iterar sobre os itens do array e
+      exibi-los na view. *!/}
       {items.map(i => {
         return (
           <View style={styles.item} key={i.key}>
@@ -45,7 +61,7 @@ const App = () => {
           </View>
         );
       })}
-    </ScrollView>
+    </ScrollView>*/
   );
 };
 
