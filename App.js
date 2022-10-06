@@ -1,19 +1,51 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 
-const App: () => Node = () => {
+const App = () => {
+  const [items, setItems] = useState([
+    {key: 1, item: 'Item 1'},
+    {key: 2, item: 'Item 2'},
+    {key: 3, item: 'Item 3'},
+    {key: 4, item: 'Item 4'},
+    {key: 5, item: 'Item 5'},
+    {key: 6, item: 'Item 6'},
+    {key: 7, item: 'Item 7'},
+    {key: 8, item: 'Item 8'},
+    {key: 9, item: 'Item 9'},
+    {key: 68, item: 'Item 27'},
+    {key: 0, item: 'Item 78'},
+    {key: 44, item: 'Item 321'},
+    {key: 25, item: 'Item 25'},
+  ]);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setItems([...items, {key: 69, item: 'Item 69'}]);
+    setRefreshing(false);
+  };
+
   return (
-    <View style={styles.body}>
-      <View style={styles.view1}>
-        <Text style={styles.text}>1</Text>
-      </View>
-      <View style={styles.view2}>
-        <Text style={styles.text}>2</Text>
-      </View>
-      <View style={styles.view3}>
-        <Text style={styles.text}>3</Text>
-      </View>
-    </View>
+    <ScrollView
+      style={styles.body}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          colors={['#f080f2']}
+        />
+      }>
+      {/* Cria uma função para iterar sobre os itens do array e
+      exibi-los na view. */}
+      {items.map(i => {
+        return (
+          <View style={styles.item} key={i.key}>
+            <Text style={styles.text}>{i.item}</Text>
+          </View>
+        );
+      })}
+    </ScrollView>
   );
 };
 
@@ -21,38 +53,19 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#0000ff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#ffffff',
   },
-  view1: {
-    flex: 1,
-    backgroundColor: '#00ffff',
-    alignItems: 'center',
+  item: {
+    margin: 10,
+    backgroundColor: '#4ae1fa',
     justifyContent: 'center',
-  },
-  view2: {
-    flex: 1,
-    backgroundColor: '#ff00ff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  view3: {
-    flex: 1,
-    backgroundColor: '#ffff00',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   text: {
     color: '#000000',
-    fontSize: 35,
+    fontSize: 45,
     fontStyle: 'italic',
     margin: 10,
-    textTransform: 'uppercase',
-  },
-  button: {
-    width: 200,
-    height: 60,
   },
 });
 
