@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 
 const App = () => {
   const [name, setName] = useState('');
@@ -28,15 +22,25 @@ const App = () => {
         onPress={onPressHandler}
         color='#00f'
       />*/}
-      <TouchableHighlight
+      {/*<TouchableHighlight
         style={styles.button}
         onPress={onPressHandler}
         activeOpacity={0.2} // valor padrão desse prop
         underlayColor="#dddddd" // define cor exibida quando botão é clicado
-      >
-        {/* o título do botão está definido na linha abaixo */}
+      >*/}
+      {/*o título do botão está definido na linha abaixo*/}
+      {/*<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+      </TouchableHighlight>*/}
+      <Pressable
+        onPress={onPressHandler}
+        hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
+        android_ripple={{color: '#00f'}}
+        style={({pressed}) => [
+          {backgroundColor: pressed ? '#dddddd' : '#00ff00'},
+          styles.button,
+        ]}>
         <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-      </TouchableHighlight>
+      </Pressable>
       {submitted ? (
         <Text style={styles.text}>You are registered as {name}</Text>
       ) : null}
@@ -65,7 +69,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: '#00ff00',
     width: 150,
     height: 50,
     alignItems: 'center',
