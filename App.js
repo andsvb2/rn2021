@@ -1,8 +1,18 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const App = () => {
   const [name, setName] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const onPressHandler = () => {
+    setSubmitted(!submitted);
+  };
   return (
     <View style={styles.body}>
       <Text style={styles.text}>Please write your name: </Text>
@@ -13,7 +23,22 @@ const App = () => {
          * for digitado. */
         onChangeText={value => setName(value)}
       />
-      <Text style={styles.text}>Your name is: {name}</Text>
+      {/* <Button
+        title={submitted ? 'Clear' : 'Submit'}
+        onPress={onPressHandler}
+        color='#00f'
+      />*/}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPressHandler}
+        activeOpacity={0.2} // valor padrão desse prop
+      >
+        {/* o título do botão está definido na linha abaixo */}
+        <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+      </TouchableOpacity>
+      {submitted ? (
+        <Text style={styles.text}>You are registered as {name}</Text>
+      ) : null}
     </View>
   );
 };
@@ -36,6 +61,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     textAlign: 'center',
     fontSize: 20,
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: '#00ff00',
+    width: 150,
+    height: 50,
+    alignItems: 'center',
   },
 });
 
