@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
+  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -28,14 +28,15 @@ const App = () => {
         onPress={onPressHandler}
         color='#00f'
       />*/}
-      <TouchableOpacity
+      <TouchableHighlight
         style={styles.button}
         onPress={onPressHandler}
         activeOpacity={0.2} // valor padrão desse prop
+        underlayColor="#dddddd" // define cor exibida quando botão é clicado
       >
         {/* o título do botão está definido na linha abaixo */}
         <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-      </TouchableOpacity>
+      </TouchableHighlight>
       {submitted ? (
         <Text style={styles.text}>You are registered as {name}</Text>
       ) : null}
