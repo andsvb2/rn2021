@@ -1,11 +1,37 @@
 import React, {useState} from 'react';
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  Alert,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 
 const App = () => {
   const [name, setName] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const onPressHandler = () => {
-    setSubmitted(!submitted);
+    if (name.length > 3) {
+      setSubmitted(!submitted);
+    } else {
+      Alert.alert(
+        'Warning',
+        'The name must be longer than 3 characters',
+        [
+          {
+            text: 'Do not show again',
+            onPress: () => console.warn('Do not show again Pressed!'),
+          },
+          {text: 'Cancel', onPress: () => console.warn('Cancel Pressed!')},
+          {text: 'OK', onPress: () => console.warn('OK Pressed!')},
+        ],
+        {
+          cancelable: true,
+          onDismiss: () => console.warn('Alert dismissed!'),
+        },
+      );
+    }
   };
   return (
     <View style={styles.body}>
