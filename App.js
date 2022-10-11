@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {
+  RefreshControl,
+  SectionList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const App = () => {
   const [items, setItems] = useState([
@@ -18,6 +24,25 @@ const App = () => {
     {name: 'Item 25'},
   ]);
 
+  const DATA = [
+    {
+      title: 'Title 1',
+      data: ['Item 1-1', 'Item 1-2', 'Item 1-3'],
+    },
+    {
+      title: 'Title 2',
+      data: ['Item 2-1', 'Item 2-2', 'Item 2-3'],
+    },
+    {
+      title: 'Title 3',
+      data: ['Item 3-1'],
+    },
+    {
+      title: 'Title 4',
+      data: ['Item 4-1', 'Item 4-2'],
+    },
+  ];
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = () => {
@@ -27,7 +52,18 @@ const App = () => {
   };
 
   return (
-    <FlatList
+    <SectionList
+      keyExtractor={(item, index) => index.toString()}
+      sections={DATA}
+      renderItem={({item}) => <Text style={styles.text}>{item}</Text>}
+      renderSectionHeader={({section}) => (
+        <View style={styles.item}>
+          <Text style={styles.text}>{section.title}</Text>
+        </View>
+      )}
+    />
+
+    /*<FlatList
       keyExtractor={(item, index) => index.toString()}
       data={items}
       renderItem={({item}) => (
@@ -42,7 +78,7 @@ const App = () => {
           colors={['#ff00ff']}
         />
       }
-    />
+    />*/
     /*  <ScrollView
       style={styles.body}
       refreshControl={
