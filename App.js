@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {
-  Alert,
   Pressable,
   StyleSheet,
   Text,
   TextInput,
+  ToastAndroid,
   View,
 } from 'react-native';
 
@@ -15,7 +15,7 @@ const App = () => {
     if (name.length > 3) {
       setSubmitted(!submitted);
     } else {
-      Alert.alert(
+      /*      Alert.alert(
         'Warning',
         'The name must be longer than 3 characters',
         [
@@ -30,6 +30,11 @@ const App = () => {
           cancelable: true,
           onDismiss: () => console.warn('Alert dismissed!'),
         },
+      );*/
+      ToastAndroid.showWithGravity(
+        'The name must be longer than 3 characters',
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
       );
     }
   };
