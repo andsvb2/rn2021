@@ -1,10 +1,19 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 const App = () => {
+  const [name, setName] = useState('');
   return (
     <View style={styles.body}>
       <Text style={styles.text}>Please write your name: </Text>
+      <TextInput
+        style={styles.input}
+        placeholder="e.g. John"
+        /* A linha abaixo atualiza o estado de name com o que
+         * for digitado. */
+        onChangeText={value => setName(value)}
+      />
+      <Text style={styles.text}>Your name is: {name}</Text>
     </View>
   );
 };
@@ -12,14 +21,21 @@ const App = () => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: '#ffffff',
+    alignItems: 'center',
   },
   text: {
     color: '#000000',
-    fontSize: 45,
-    fontStyle: 'italic',
+    fontSize: 20,
     margin: 10,
+  },
+  input: {
+    width: 200,
+    borderWidth: 1,
+    borderColor: '#555',
+    borderRadius: 5,
+    textAlign: 'center',
+    fontSize: 20,
   },
 });
 
